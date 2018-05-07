@@ -23,10 +23,21 @@ double **ler(char *archive, int *dimension) {
 
 }
 
+void imprimir(double **matrix, int dim){
+	int i, j;
+	for(i=0;i<dim;i++) {
+		for(j=0;j<dim+1;j++) { 
+			printf("%5.2lf\t",matrix[i][j]);
+		}	  
+		printf("\n");
+	}
+}
+
 int main(int argc, char **argv) {
 	double **M;
 	double *raizes;
 	int i, dim;
 
 	M=ler(argv[1], &dim);
+	imprimir(M, dim);
 }
