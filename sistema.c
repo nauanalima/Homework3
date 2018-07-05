@@ -5,12 +5,10 @@ double triangsup (double **matrix, int dim) {
 	int i, j, k;
 	double aux;
 	for(j=0; j<=dim; j++) {
-		for (i=0; i<dim; i++) {
-			if (i>j) {
-				aux=matrix[i][j]/matrix[j][j];
-				for (k=0; k<=dim; k++)
-					matrix[i][j] = matrix[i][k] - matrix[j][k];
-			}
+		for (i=j+1; i<dim; i++) {
+			aux = matrix[i][j]/matrix[j][j];
+			for (k=0; k<dim+1; k++)
+				matrix[i][k] = matrix[i][k] - aux*matrix[j][k];		
 		}
 	}
 	return **matrix;
@@ -55,7 +53,6 @@ int main(int argc, char **argv) {
 
 	M=ler(argv[1], &dim);
 	imprime(M, dim);
-	printf("\nDimensão: %d\n", dim);
 	triangsup(M,dim);
 	imprime(M, dim);
 
