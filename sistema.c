@@ -1,6 +1,21 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+double triangsup (double **matrix, int dim) {
+	int i, j, k;
+	double aux;
+	for(j=0; j<=dim; j++) {
+		for (i=0; i<dim; i++) {
+			if (i>j) {
+				aux=matrix[i][j]/matrix[j][j];
+				for (k=0; k<=dim; k++)
+					matrix[i][j] = matrix[i][k] - matrix[j][k];
+			}
+		}
+	}
+	return **matrix;
+}
+
 double **ler(char *archive, int *dimension) {
 	int i, j, dim;
 	double **matrix, a;
@@ -23,7 +38,7 @@ double **ler(char *archive, int *dimension) {
 
 }
 
-void imprimir(double **matrix, int dim){
+void imprime(double **matrix, int dim){
 	int i, j;
 	for(i=0;i<dim;i++) {
 		for(j=0;j<dim+1;j++) { 
@@ -39,5 +54,9 @@ int main(int argc, char **argv) {
 	int i, dim;
 
 	M=ler(argv[1], &dim);
-	imprimir(M, dim);
+	imprime(M, dim);
+	printf("\nDimensão: %d\n", dim);
+	triangsup(M,dim);
+	imprime(M, dim);
+
 }
