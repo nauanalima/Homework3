@@ -1,19 +1,18 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-double subsreversa (double **matrix, double *root, int dim) {
+double subsreversa (double **matrix, double *root, const int dim) {
 	int j, k, n;
 	double sum;
 	root[dim-1] = matrix[dim-1][dim]/matrix[dim-1][dim-1];
-	printf("root[%d] = matrix[%d][%d]/matrix[%d][%d]\n", dim-1,dim-1,dim,dim,dim);
-	for (k=dim-2; k=0; k--) {
+	k = dim-2;
+	while (k>=0) {
 		sum = matrix[k][dim];
-		printf("sum = matrix[%d][%d]\n",k,n+1);
-		for (j=k+1; j=dim-1; j++)
+		for (j=k+1; j<dim; j++) 
 			sum = sum - matrix[k][j]*root[j];
 		root[k] = sum/matrix[k][k];
+		k--;
 	}
-	printf("ESSE CARALHO NÃO ENTROU NO LOOP\n");
 }
 
 double triangsup (double **matrix, int dim) {
@@ -53,12 +52,14 @@ double **ler(char *archive, int *dimension) {
 
 void imprime(double **matrix, int dim){
 	int i, j;
+	printf("Matriz: \n");
 	for(i=0;i<dim;i++) {
 		for(j=0;j<dim+1;j++) { 
 			printf("%5.2lf\t",matrix[i][j]);
 		}	  
 		printf("\n");
 	}
+	printf("\n");
 }
 
 int main(int argc, char **argv) {
