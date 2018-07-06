@@ -1,6 +1,21 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+double subsreversa (double **matrix, double *root, int dim) {
+	int j, k, n;
+	double sum;
+	root[dim-1] = matrix[dim-1][dim]/matrix[dim-1][dim-1];
+	printf("root[%d] = matrix[%d][%d]/matrix[%d][%d]\n", dim-1,dim-1,dim,dim,dim);
+	for (k=dim-2; k=0; k--) {
+		sum = matrix[k][dim];
+		printf("sum = matrix[%d][%d]\n",k,n+1);
+		for (j=k+1; j=dim-1; j++)
+			sum = sum - matrix[k][j]*root[j];
+		root[k] = sum/matrix[k][k];
+	}
+	printf("ESSE CARALHO NÃO ENTROU NO LOOP\n");
+}
+
 double triangsup (double **matrix, int dim) {
 	int i, j, k;
 	double aux;
@@ -55,5 +70,9 @@ int main(int argc, char **argv) {
 	imprime(M, dim);
 	triangsup(M,dim);
 	imprime(M, dim);
-
+	raizes = malloc(dim*sizeof(double));
+	subsreversa(M,raizes,dim);
+	for (i=0; i<dim; i++)
+		printf("x%1d = %5.2lf\n", i, raizes[i]);
+	return 0;
 }
